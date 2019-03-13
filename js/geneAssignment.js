@@ -1,4 +1,19 @@
-function estimateCost(){
+jQuery(function () {
+    jQuery("#travelCity").autocomplete({
+        source: function (request, response) {
+            jQuery.getJSON(
+                "http://gd.geobytes.com/AutoCompleteCity?callback=?&q=" + request.term,
+                function (data) {
+                    response(data);
+                }
+            );
+        },
+        minLength: 3,
+    });
+    jQuery("#travelCity").autocomplete("option", "delay", 10);
+});
+
+function estimateCost() {
     totalPrice = 0;
 
     // //passport notification
@@ -17,15 +32,15 @@ function estimateCost(){
 
     if (selectedTravelCity.indexOf('San Francisco, CA, United States') || selectedTravelCity.indexOf('Los Angeles, CA, United States')) {
         totalPrice = totalPrice += 200;
-    } 
+    }
     console.log(totalPrice);
 
     //per day
     let day = document.getElementsByName('day');
 
-    for (i = 0;i < day.length; i++) {
-        if (day[i].selected === true) {            
-            totalPrice = 150 * day[i].value;
+    for (i = 0; i < day.length; i++) {
+        if (day[i].selected === true) {
+            totalPrice += 150 * day[i].value;
             console.log(totalPrice)
         }
     }
@@ -41,7 +56,7 @@ function estimateCost(){
     //     totalPrice = totalPrice += 500;
     // }
     // console.log(totalPrice);
-    
+
     // //spouse
     // let spouse = document.getElementById('addSpouse');
 
@@ -52,19 +67,5 @@ function estimateCost(){
 }
 /*autocomplete*/
 
-jQuery(function () 
- {
-	 jQuery("#travelCity").autocomplete({
-		source: function (request, response) {
-		 jQuery.getJSON(
-			"http://gd.geobytes.com/AutoCompleteCity?callback=?&q="+request.term,
-			function (data) {
-			 response(data);
-			}
-		 );
-		},
-		minLength: 3,
-	 });
-	 jQuery("#travelCity").autocomplete("option", "delay", 10);
-    });
+
 
