@@ -7,6 +7,7 @@ const picker = datepicker('#from', {
         const fromValue = date.toLocaleDateString()
         input.value = fromValue; // => '1/1/2099'
         startPicker = fromValue;
+        calculate();
     },
     onSelect: (instance, selectedDate) => {
         instance.setMin(selectedDate);
