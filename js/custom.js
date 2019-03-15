@@ -26,7 +26,7 @@ const end = datepicker('#to', {
 
 function calculate() {
     var diff = 0;
-    if (totalPrice === 0 && startPicker && endPicker) {
+    if (totalPrice === 0 && picker && end) {
         diff = Math.floor((new Date(endPicker).getTime() - new Date(startPicker).getTime()) / 86400000); // ms per day
         let totalDays = diff;
         totalPrice = totalDays * 150;
@@ -62,7 +62,7 @@ function estimateCost() {
 
         if (selectedTravelCity.includes('San Francisco, CA, United States') || selectedTravelCity.includes('Los Angeles, CA, United States')) {
             totalPrice = totalPrice += 200;
-        }
+        } 
         console.log(totalPrice);
 
         // //per day
