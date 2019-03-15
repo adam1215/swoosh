@@ -7,10 +7,10 @@ const picker = datepicker('#from', {
         const fromValue = date.toLocaleDateString()
         input.value = fromValue; // => '1/1/2099'
         startPicker = fromValue;
-        calculate();
     },
     onSelect: (instance, selectedDate) => {
         instance.setMin(selectedDate);
+        calculate();
     },
 });
 
@@ -55,44 +55,45 @@ jQuery(function () {
 });
 
 function estimateCost() {
-    //surcharge
-    let travelCity = document.getElementById('travelCity');
-    let selectedTravelCity = travelCity.value;
+    if (startPicker && endPicker && travelCity.value) {
+        //surcharge
+        let travelCity = document.getElementById('travelCity');
+        let selectedTravelCity = travelCity.value;
 
-    if (selectedTravelCity.indexOf('San Francisco, CA, United States') || selectedTravelCity.indexOf('Los Angeles, CA, United States')) {
-        totalPrice = totalPrice += 200;
+        if (selectedTravelCity.includes('San Francisco, CA, United States') || selectedTravelCity.includes('Los Angeles, CA, United States')) {
+            totalPrice = totalPrice += 200;
+        }
+        console.log(totalPrice);
+
+        // //per day
+        // let day = document.getElementsByName('day');
+
+        // for (i = 0; i < day.length; i++) {
+        //     if (day[i].selected === true) {
+        //         totalPrice += 150 * day[i].value;
+        //         console.log(totalPrice)
+        //     }
+        // }
+
+        //first class
+        let firstClass = document.getElementById('firstClass');
+
+        if (firstClass.checked) {
+            totalPrice = totalPrice += 500;
+        }
+        console.log(totalPrice);
+
+        //spouse
+        let spouse = document.getElementById('addSpouse');
+
+        if (spouse.checked) {
+            totalPrice = totalPrice * 2;
+        }
+        console.log(totalPrice);
+
+        let flightTotal = document.getElementById('flightTotal');
+        return flightTotal.innerHTML = 'Your estimated cost for this trip is: $' + totalPrice;
     }
-    console.log(totalPrice);
-
-    // //per day
-    // let day = document.getElementsByName('day');
-
-    // for (i = 0; i < day.length; i++) {
-    //     if (day[i].selected === true) {
-    //         totalPrice += 150 * day[i].value;
-    //         console.log(totalPrice)
-    //     }
-    // }
-
-    //first class
-    let firstClass = document.getElementById('firstClass');
-
-    if (firstClass.checked) {
-        totalPrice = totalPrice += 500;
-    }
-    console.log(totalPrice);
-
-    //spouse
-    let spouse = document.getElementById('addSpouse');
-
-    if (spouse.checked) {
-        totalPrice = totalPrice * 2;
-    }
-    console.log(totalPrice);
-
-    let flightTotal = document.getElementById('flightTotal');
-    return flightTotal.innerHTML = 'Your estimated cost for this trip is: $' + totalPrice;
 }
-
 
 
