@@ -62,7 +62,7 @@ function estimateCost() {
 
         if (selectedTravelCity.includes('San Francisco, CA, United States') || selectedTravelCity.includes('Los Angeles, CA, United States')) {
             totalPrice = totalPrice += 200;
-        } 
+        }
         console.log(totalPrice);
 
         // //per day
